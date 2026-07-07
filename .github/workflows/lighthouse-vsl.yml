@@ -1,0 +1,44 @@
+name: Lighthouse VSL Mobile
+
+# Roda Lighthouse mobile quando push afeta a pagina principal.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+  workflow_dispatch:
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Aguardar deploy Vercel propagar
+        run: sleep 75
+
+      - name: Definir URL alvo (preferir domínio custom se setado)
+        id: target
+        run: |
+          if [ -n "${{ vars.OFFER_DOMAIN }}" ]; then
+            echo "url=https://${{ vars.OFFER_DOMAIN }}/" >> $GITHUB_OUTPUT
+          else
+            REPO_NAME="${GITHUB_REPOSITORY#*/}"
+            echo "url=https://${REPO_NAME}.vercel.app/" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Lighthouse mobile
+        uses: treosh/lighthouse-ci-action@v11
+        with:
+          urls: ${{ steps.target.outputs.url }}
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+          configPath: ./.github/lighthouse-config.json
+        continue-on-error: true
+
+      - name: Sumário no PR / commit
+        if: always()
+        run: |
+          echo "## Lighthouse VSL — ${{ steps.target.outputs.url }}" >> $GITHUB_STEP_SUMMARY
+          echo "Veja artefato 'lighthouse-results' acima pra HTML report completo." >> $GITHUB_STEP_SUMMARY
