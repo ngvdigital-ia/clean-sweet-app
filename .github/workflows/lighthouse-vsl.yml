@@ -6,7 +6,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'index.html'
+      - 'vsl/**'
   workflow_dispatch:
 
 jobs:
@@ -22,10 +22,10 @@ jobs:
         id: target
         run: |
           if [ -n "${{ vars.OFFER_DOMAIN }}" ]; then
-            echo "url=https://${{ vars.OFFER_DOMAIN }}/" >> $GITHUB_OUTPUT
+            echo "url=https://${{ vars.OFFER_DOMAIN }}/vsl/" >> $GITHUB_OUTPUT
           else
             REPO_NAME="${GITHUB_REPOSITORY#*/}"
-            echo "url=https://${REPO_NAME}.vercel.app/" >> $GITHUB_OUTPUT
+            echo "url=https://${REPO_NAME}.vercel.app/vsl/" >> $GITHUB_OUTPUT
           fi
 
       - name: Lighthouse mobile
