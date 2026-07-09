@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Special one-time offer for Clean Meals — available only on this page.">
+<title>Clean Meals — Special Offer</title>
+<!-- clone fiel de https://panaderiacero.com/ces-up1-f2-clean-meals-2/ (single-file + scroll capture, 2026-07-08) -->
+<!-- dns-prefetch: player VTurb (pendente, ver TODO abaixo) -->
+<link rel="dns-prefetch" href="https://cdn.converteai.net">
+<link rel="dns-prefetch" href="https://scripts.converteai.net">
+<link rel="dns-prefetch" href="https://images.converteai.net">
+<link rel="dns-prefetch" href="https://m3u8.vturb.net">
+<link rel="dns-prefetch" href="https://api.vturb.com.br">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#fff;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  img{max-width:100%;height:auto}
+  .attention-bar{width:100%;background:linear-gradient(135deg,#b10f0f 0%,#ff2d2d 55%,#b10f0f 100%);color:#fff;padding:14px 12px;position:relative;overflow:hidden;border-bottom:3px solid rgba(238,152,2,.95);box-shadow:0 18px 40px rgba(177,15,15,.25)}
+  .attention-bar .glow{position:absolute;inset:-2px;background:radial-gradient(circle at 15% 30%,rgba(255,255,255,.18),transparent 45%),radial-gradient(circle at 85% 60%,rgba(236,215,163,.22),transparent 52%),linear-gradient(90deg,transparent 0%,rgba(255,255,255,.10) 50%,transparent 100%);pointer-events:none;mix-blend-mode:screen}
+  .attention-bar .lines{position:absolute;inset:0;background:repeating-linear-gradient(135deg,rgba(255,255,255,.08) 0px,rgba(255,255,255,.08) 8px,transparent 8px,transparent 18px);opacity:.18;pointer-events:none}
+  .attention-bar .inner{position:relative;max-width:980px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:12px;text-align:center}
+  .attention-bar .icon{width:40px;height:40px;border-radius:14px;background:rgba(255,255,255,.12);border:1px solid rgba(236,215,163,.35);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(0,0,0,.18);flex:0 0 auto;font-size:20px}
+  .attention-bar .text{font-weight:1000;letter-spacing:.35px;text-transform:uppercase;font-size:24px;line-height:1.2}
+  .attention-bar .corner{position:absolute;right:-40px;top:-40px;width:120px;height:120px;border-radius:28px;background:radial-gradient(circle at 30% 30%,rgba(238,152,2,.55),transparent 60%);transform:rotate(18deg);opacity:.9;pointer-events:none}
+  .video-wrap{max-width:400px;margin:24px auto 0;padding:0 16px}
+  .video-placeholder{position:relative;width:100%;padding:177.78% 0 0;border-radius:12px;background:#111;overflow:hidden}
+  .video-placeholder .msg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#f3c969;font-weight:700;font-size:16px;text-align:center;padding:24px;line-height:1.5}
+  .offer-card{max-width:520px;margin:28px auto 0;padding:30px 26px;border-radius:22px;background:linear-gradient(180deg,#fffaf2 0%,#ffffff 100%);box-shadow:0 20px 50px rgba(0,0,0,0.12);border:1px solid rgba(238,154,14,0.25);font-family:Arial,sans-serif;text-align:center}
+  .badge{display:inline-block;background:#EE9A0E;color:#fff;font-size:13px;font-weight:900;letter-spacing:.5px;text-transform:uppercase;padding:8px 14px;border-radius:999px;margin-bottom:18px}
+  .reg-label{font-size:18px;color:#6b7280;margin-bottom:6px}
+  .reg-price{font-size:38px;font-weight:900;color:#c00307;text-decoration:line-through;margin-bottom:18px}
+  .today-label{font-size:18px;color:#111827;font-weight:700;margin-bottom:8px}
+  .today-price{font-size:60px;font-weight:900;color:#EE9A0E;line-height:1;margin-bottom:12px}
+  .pill{display:inline-block;background:#fef3c7;color:#92400e;font-size:14px;font-weight:800;padding:8px 16px;border-radius:999px;margin-bottom:18px}
+  .subscription-note{background:#f9fafb;border:1px solid #e5e7eb;border-radius:16px;padding:14px 16px}
+  .subscription-note .title{font-size:15px;font-weight:800;color:#111827;margin-bottom:4px}
+  .subscription-note .body{font-size:14px;color:#4b5563;line-height:1.5}
+  .cta-wrap{max-width:520px;margin:24px auto 40px;padding:0 16px;text-align:center}
+  .cta-yes{display:block;width:100%;background:linear-gradient(135deg,#EE9A0E,#c00307);color:#fff;font-weight:900;font-size:18px;text-transform:uppercase;letter-spacing:.3px;text-decoration:none;padding:18px 20px;border-radius:14px;box-shadow:0 14px 32px rgba(192,3,7,.28)}
+</style>
+</head>
+<body>
+  <div class="attention-bar">
+    <div class="glow"></div>
+    <div class="lines"></div>
+    <div class="inner">
+      <div class="icon">⚠️</div>
+      <div class="text">Wait! Your purchase has not been completed yet.<br>Do not close this page before reading this</div>
+    </div>
+    <div class="corner"></div>
+  </div>
+
+  <!--
+    TODO video pendente: arquivo "UpSell1-CleanSweets-$39-04;37.mp4" ainda nao subiu no VTurb.
+    Quando subir: trocar o bloco .video-placeholder pelo <vturb-smartplayer id="vid-PLACEHOLDER" ...>
+    com o account ID fixo do projeto (00c3b583-8874-4e64-a32e-65f6dd9ba521) + script player.js,
+    e reativar o gate de revelacao pos-pitch abaixo (o original usa delaySeconds=276 antes de
+    revelar a oferta via player.displayHiddenElements(delaySeconds, [".esconder"], {persist:true})
+    ligado ao evento "player:ready" do player especifico -- NAO usar seletor amplo).
+  -->
+  <div class="video-wrap">
+    <div class="video-placeholder">
+      <div class="msg">[ vídeo pendente — falta subir no VTurb ]</div>
+    </div>
+  </div>
+
+  <!-- TODO: quando o video estiver ativo, envolver o bloco abaixo com class="esconder" e religar o gate -->
+  <div class="offer-card">
+    <div class="badge">Special Offer Only on This Page</div>
+    <div class="reg-label">Regular price</div>
+    <div class="reg-price">$49.90 USD</div>
+    <div class="today-label">Today you get access with a discount for only</div>
+    <div class="today-price">$27 USD</div>
+    <div class="pill">One-time payment</div>
+    <div class="subscription-note">
+      <div class="title">Not a subscription</div>
+      <div class="body">You make a single payment today and get full access to <strong>Clean Meals</strong>. No monthly charges and no automatic renewals.</div>
+    </div>
+  </div>
+
+  <div class="cta-wrap">
+    <a href="#" class="cta-yes">Get Clean Meals now — $27</a>
+  </div>
+</body>
+</html>
