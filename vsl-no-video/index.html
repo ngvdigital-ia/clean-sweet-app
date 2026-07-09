@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Clean Sweets - Eat Desserts Without Guilt. Sugar-free, diabetic-friendly dessert recipes.">
+    <link rel="dns-prefetch" href="//cdn.utmify.com.br">
+    <link rel="dns-prefetch" href="//connect.facebook.net">
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <title>Clean Sweets — Eat Desserts Without Guilt</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&amp;family=Open+Sans:wght@400;600;700&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&amp;family=Open+Sans:wght@400;600;700&amp;display=swap"></noscript>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: #333;
+            background: #fff;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* HERO */
+        .hero {
+            background: url('images/f1.webp') center/cover no-repeat;
+            padding: 60px 0 40px;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.88);
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text h1 {
+            font-style: italic;
+            color: #D4851C;
+            font-size: 2.4rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .hero-image {
+            flex: 0 0 380px;
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-height: 420px;
+            border-radius: 12px;
+        }
+
+        /* CTA BUTTON */
+        .cta-btn {
+            display: inline-block;
+            background: #D4851C;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 700;
+            padding: 16px 40px;
+            border-radius: 8px;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 24px;
+            transition: background 0.3s, transform 0.2s;
+            text-align: center;
+        }
+
+        .cta-btn:hover {
+            background: #b8710f;
+            transform: scale(1.03);
+        }
+
+        /* COMPARISON */
+        .comparison {
+            background: #5C4033;
+            padding: 60px 0;
+            color: #fff;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 10px;
+        }
+
+        .comparison-col h2 {
+            font-style: italic;
+            color: #D4851C;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .comparison-col img {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .comparison-col ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .comparison-col ul li {
+            padding: 8px 0;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .comparison-col ul li::before {
+            flex-shrink: 0;
+            font-size: 1rem;
+        }
+
+        .bad-col ul li::before {
+            content: '😞';
+        }
+
+        .good-col ul li::before {
+            content: '✅';
+        }
+
+        .comparison-bottom {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 20px 30px;
+            margin-top: 30px;
+        }
+
+        .comparison-bottom p {
+            margin-bottom: 6px;
+            font-size: 0.95rem;
+        }
+
+        .comparison-left-bottom {}
+
+        .comparison-left-bottom p::before {
+            content: '👉 ';
+        }
+
+        .comparison-right-bottom {}
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+
+        .check-item::before {
+            content: '✔';
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .note-text {
+            margin-top: 12px;
+            font-style: italic;
+            color: #ddd;
+        }
+
+        /* EASY RECIPES */
+        .easy-recipes {
+            padding: 60px 0;
+            background: #faf7f2;
+        }
+
+        .easy-recipes .container {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .easy-text {
+            flex: 1;
+        }
+
+        .easy-text h2 {
+            font-style: italic;
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+
+        .easy-text .subtitle {
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin-bottom: 16px;
+        }
+
+        .easy-text p {
+            line-height: 1.7;
+            font-weight: 600;
+        }
+
+        .easy-text .highlight {
+            color: #D4851C;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-top: 16px;
+        }
+
+        .easy-image {
+            flex: 0 0 400px;
+        }
+
+        .easy-image img {
+            border-radius: 12px;
+        }
+
+        /* CATEGORIES */
+        .categories {
+            padding: 60px 0;
+        }
+
+        .categories h2 {
+            font-style: italic;
+            color: #D4851C;
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .cat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+        }
+
+        .cat-card {
+            background: #faf7f2;
+            border-radius: 12px;
+            padding: 0;
+            border: 1px solid #e8e0d5;
+            overflow: hidden;
+        }
+
+        .cat-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .cat-card-content {
+            padding: 20px 24px;
+        }
+
+        .cat-card h3 {
+            color: #D4851C;
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+
+        .cat-card ul {
+            list-style: none;
+        }
+
+        .cat-card ul li {
+            padding: 4px 0;
+            font-size: 0.9rem;
+        }
+
+        /* SOCIAL PROOF BAR */
+        .social-proof {
+            background: #5C4033;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .social-proof p {
+            color: #D4851C;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* WHO I AM */
+        .who-section {
+            padding: 60px 0;
+            background: #fff;
+        }
+
+        .who-section .container {
+            display: flex;
+            align-items: flex-start;
+            gap: 40px;
+        }
+
+        .who-image {
+            flex: 0 0 280px;
+        }
+
+        .who-image img {
+            border-radius: 12px;
+            width: 100%;
+        }
+
+        .who-text {
+            flex: 1;
+        }
+
+        .who-text h2 {
+            font-style: italic;
+            color: #D4851C;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .who-text p {
+            line-height: 1.7;
+            margin-bottom: 14px;
+            color: #444;
+        }
+
+        /* APP BENEFITS */
+        .app-benefits {
+            padding: 60px 0;
+            background: #faf7f2;
+        }
+
+        .app-benefits .container {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .app-phone {
+            flex: 0 0 260px;
+            text-align: center;
+        }
+
+        .app-phone img {
+            max-height: 480px;
+        }
+
+        .app-text {
+            flex: 1;
+        }
+
+        .app-text h2 {
+            font-style: italic;
+            color: #D4851C;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .app-text ul {
+            list-style: none;
+        }
+
+        .app-text ul li {
+            padding: 10px 0;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .app-text ul li::before {
+            content: '✅';
+            font-size: 1.1rem;
+        }
+
+        /* TESTIMONIALS */
+        .testimonials {
+            padding: 60px 0;
+        }
+
+        .testimonials h2 {
+            font-style: italic;
+            color: #D4851C;
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .test-card {
+            background: #faf7f2;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            border: 1px solid #e8e0d5;
+        }
+
+        .test-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 16px;
+        }
+
+        .test-card blockquote {
+            font-style: italic;
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .test-card .author {
+            font-weight: 700;
+            color: #D4851C;
+            font-size: 0.9rem;
+        }
+
+        /* BONUSES */
+        .bonuses {
+            padding: 60px 0;
+            background: #5C4033;
+            color: #fff;
+        }
+
+        .bonuses h2 {
+            font-style: italic;
+            color: #D4851C;
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .bonus-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .bonus-card {
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .bonus-card img {
+            width: 100%;
+        }
+
+        .bonus-card .bonus-info {
+            padding: 16px;
+        }
+
+        .bonus-card h3 {
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            font-style: italic;
+            color: #f0d0a0;
+        }
+
+        .bonus-price {
+            text-decoration: line-through;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        .bonus-free {
+            color: #4CAF50;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* OFFER */
+        .offer {
+            padding: 60px 0;
+            background: #faf7f2;
+            text-align: center;
+        }
+
+        .offer h2 {
+            font-style: italic;
+            color: #D4851C;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .offer h3 {
+            font-style: italic;
+            color: #333;
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .countdown-item {
+            background: #D4851C;
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 8px;
+            min-width: 70px;
+        }
+
+        .countdown-item .num {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: block;
+        }
+
+        .countdown-item .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .price-box {
+            margin: 30px auto;
+            max-width: 500px;
+            background: #fff;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 2px solid #D4851C;
+        }
+
+        .price-old {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 1.3rem;
+        }
+
+        .price-new {
+            color: #D4851C;
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 8px 0;
+        }
+
+        .price-note {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+        }
+
+        .offer-list {
+            text-align: left;
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .offer-list li {
+            padding: 6px 0;
+            font-size: 0.95rem;
+        }
+
+        .offer-list li::before {
+            content: '✅ ';
+        }
+
+        .offer .cta-btn {
+            display: block;
+            max-width: 400px;
+            margin: 24px auto 0;
+            font-size: 1.2rem;
+            padding: 18px 40px;
+        }
+
+        /* GUARANTEE */
+        .guarantee {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .guarantee .container {
+            max-width: 700px;
+        }
+
+        .guarantee img {
+            max-width: 180px;
+            margin-bottom: 20px;
+        }
+
+        .guarantee h2 {
+            font-style: italic;
+            color: #D4851C;
+            font-size: 1.8rem;
+            margin-bottom: 16px;
+        }
+
+        .guarantee p {
+            line-height: 1.7;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        /* FAQ */
+        .faq {
+            padding: 60px 0;
+            background: #faf7f2;
+        }
+
+        .faq h2 {
+            font-style: italic;
+            color: #D4851C;
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .faq-item {
+            background: #fff;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border: 1px solid #e8e0d5;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 18px 24px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1rem;
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.4rem;
+            color: #D4851C;
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-question::after {
+            content: '−';
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-answer-inner {
+            padding: 0 24px 18px;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-image {
+                flex: none;
+                width: 100%;
+            }
+
+            .hero-text h1 {
+                font-size: 1.8rem;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .easy-recipes .container {
+                flex-direction: column;
+            }
+
+            .easy-image {
+                flex: none;
+                width: 100%;
+            }
+
+            .who-section .container {
+                flex-direction: column;
+            }
+
+            .who-image {
+                flex: none;
+                width: 100%;
+                max-width: 280px;
+                margin: 0 auto;
+            }
+
+            .app-benefits .container {
+                flex-direction: column-reverse;
+            }
+
+            .app-phone {
+                flex: none;
+            }
+
+            .test-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .bonus-grid {
+                grid-template-columns: 1fr;
+                max-width: 340px;
+                margin: 0 auto;
+            }
+
+            .cat-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <!-- competitor UTMify removed -->
+  <!-- competitor GA/GTM removed -->
+<!-- competitor beacon removed --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', 'META_PIXEL_ID_TODO');fbq('track', 'PageView');</script>
+<script>
+  window.pixelId = "69b4c941c50ca6489c210ca6";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1466346404944163');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1466346404944163&ev=PageView&noscript=1"/></noscript>
+<!-- /Meta Pixel -->
+</head>
+
+<body>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-text">
+                <h1>Eat Bread, Desserts, and Your Favorite Foods Again Without Guilt &mdash; and Stop Living in Fear of
+                    Blood Sugar Spikes</h1>
+                <p>Learn to make easy, quick, and affordable recipes &mdash; flour-free and sugar-free.</p>
+                <a href="#compra" class="cta-btn">I want to make delicious recipes</a>
+            </div>
+            <div class="hero-image">
+                <img src="images/f4.webp" alt="Natasha - Clean Sweets">
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPARISON SECTION -->
+    <section class="comparison">
+        <div class="container">
+            <div class="comparison-grid">
+                <div class="comparison-col bad-col">
+                    <h2>Common Healthy Recipes</h2>
+                    <img src="images/f1.webp" alt="Common recipes that disappoint">
+                    <ul>
+                        <li>Pudding that comes out watery and thin</li>
+                        <li>Chocolate that tastes bitter and grainy</li>
+                        <li>Cookies hard as rocks</li>
+                        <li>Cupcakes dry on the inside</li>
+                        <li>Caramel fudge with no consistency</li>
+                        <li>Banana pudding with no creaminess</li>
+                        <li>Donuts that come out dense and flat</li>
+                        <li>Brownies with a rubbery texture</li>
+                    </ul>
+                    <div class="comparison-bottom comparison-left-bottom">
+                        <p><strong>And the worst part&hellip;</strong></p>
+                        <p>You follow the recipe to the letter</p>
+                        <p>You spend money on expensive ingredients</p>
+                        <p>You wait with hope</p>
+                        <p>And the result is a disappointment.</p>
+                    </div>
+                </div>
+                <div class="comparison-col good-col">
+                    <h2>My Specialized Technique</h2>
+                    <img src="images/f2.webp" alt="Perfect results with my technique">
+                    <ul>
+                        <li>Pudding with that perfect silky wobble</li>
+                        <li>Chocolate that's rich, glossy and creamy</li>
+                        <li>Cookies soft on the inside</li>
+                        <li>Cupcakes moist and fluffy</li>
+                        <li>Caramel fudge with real consistency</li>
+                        <li>Banana pudding thick and velvety smooth</li>
+                        <li>Donuts golden and crispy on the outside</li>
+                        <li>Brownies fudgy and melt-in-your-mouth</li>
+                    </ul>
+                    <div class="comparison-bottom comparison-right-bottom">
+                        <p><strong>And nobody notices that it's:</strong></p>
+                        <div class="check-item">Flour-free</div>
+                        <div class="check-item">Sugar-free</div>
+                        <p class="note-text">Because it simply tastes like a normal dessert.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EASY RECIPES -->
+    <section class="easy-recipes">
+        <div class="container">
+            <div class="easy-text">
+                <h2>Easy, Quick, and Affordable Recipes</h2>
+                <p class="subtitle">With Simple and Accessible Ingredients</p>
+                <p>Flours that are easy to find.<br>
+                    Clear substitutions.<br>
+                    Portions clearly explained.<br>
+                    Step-by-step method.</p>
+                <p class="highlight">No complications.</p>
+                <a href="#compra" class="cta-btn">I want to make delicious recipes</a>
+            </div>
+            <div class="easy-image">
+                <img src="images/f3.webp" alt="Basket of healthy desserts">
+            </div>
+        </div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section class="categories">
+        <div class="container">
+            <h2>More than 400 recipes organized by categories</h2>
+            <div class="cat-grid">
+                <div class="cat-card">
+                    <img src="images/4.webp" alt="Desserts and Sweets">
+                    <div class="cat-card-content">
+                        <h3>Desserts and Sweets</h3>
+                        <ul>
+                            <li>&#127854; Moist pudding cakes</li>
+                            <li>&#129383; Creamy pies</li>
+                            <li>&#127856; Dairy-free cheesecake</li>
+                            <li>&#127851; Fudgy brownies</li>
+                            <li>&#127850; Soft-baked cookies</li>
+                            <li>&#127874; Wholesome panettone</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="cat-card">
+                    <img src="images/11111.webp" alt="Real Bakery">
+                    <div class="cat-card-content">
+                        <h3>Real Bakery</h3>
+                        <ul>
+                            <li>&#127838; Sandwich bread</li>
+                            <li>&#129366; Rustic artisan loaf</li>
+                            <li>&#129366; Dinner rolls</li>
+                            <li>&#127828; Burger buns</li>
+                            <li>&#129360; Sweet bread</li>
+                            <li>&#129366; Healthy baguette</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="cat-card">
+                    <img src="images/2.webp" alt="Arepas and Tortillas">
+                    <div class="cat-card-content">
+                        <h3>Arepas and Tortillas</h3>
+                        <ul>
+                            <li>&#129747; Soft and flexible arepas</li>
+                            <li>&#127790; Perfectly balanced tortillas</li>
+                            <li>&#129747; Doughs that never crack</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="cat-card">
+                    <img src="images/3.webp" alt="Pizzas and Empanadas">
+                    <div class="cat-card-content">
+                        <h3>Pizzas and Empanadas</h3>
+                        <ul>
+                            <li>&#127829; Pizza with a real crust</li>
+                            <li>&#129747; Elastic, stretchy dough</li>
+                            <li>&#129375; Empanadas that hold together</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="cat-card">
+                    <img src="images/7.webp" alt="Pastries and Croissants">
+                    <div class="cat-card-content">
+                        <h3>Pastries and Croissants</h3>
+                        <ul>
+                            <li>&#129360; Perfectly laminated croissants</li>
+                            <li>&#129360; Soft pastries</li>
+                            <li>&#127838; Brioche-style dough</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="cat-card">
+                    <img src="images/5.webp" alt="Everyday Meals">
+                    <div class="cat-card-content">
+                        <h3>Everyday Meals</h3>
+                        <ul>
+                            <li>&#127749; Quick breakfasts</li>
+                            <li>&#127822; Guilt-free snacks</li>
+                            <li>&#129367; Diabetic-friendly lunches</li>
+                            <li>&#127769; Easy weeknight dinners</li>
+                            <li>&#129379; Soups and creamy bisques</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="cat-card">
+                    <img src="images/6.webp" alt="Bases and Preparations">
+                    <div class="cat-card-content">
+                        <h3>Bases and Preparations</h3>
+                        <ul>
+                            <li>&#129474; Homemade mixes</li>
+                            <li>&#127806; Functional flours</li>
+                            <li>&#129379; Sauces and creams</li>
+                            <li>&#128260; Smart substitutions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOCIAL PROOF -->
+    <section class="social-proof">
+        <div class="container">
+            <p>What people are saying</p>
+        </div>
+    </section>
+
+    <!-- WHO I AM -->
+    <section class="who-section">
+        <div class="container">
+            <div class="who-image">
+                <img src="images/f4.webp" alt="Natasha">
+            </div>
+            <div class="who-text">
+                <h2>Who I Am</h2>
+                <p>I'm Natasha, internationally recognized as one of the world's top pastry chefs and a pioneer in
+                    healthy baking.</p>
+                <p>But my story changed when I was diagnosed with insulin resistance and lactose intolerance. Suddenly,
+                    everything I loved &mdash; bread, sweets, desserts &mdash; seemed forbidden. I tried "healthy"
+                    recipes and only found dry textures and soulless flavors.</p>
+                <p><strong>I refused to accept that healthy had to taste bad.</strong></p>
+                <p>Today I live in Paris, where I perfected techniques to recreate real crumb, moisture, and flavor
+                    &mdash; without gluten, without flour, without added sugar, and without lactose.</p>
+                <p>This app was born from that decision: to enjoy what you love again, without compromise.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- APP BENEFITS -->
+    <section class="app-benefits">
+        <div class="container">
+            <div class="app-text">
+                <h2>Clean Sweet APP</h2>
+                <ul>
+                    <li>Eat desserts without guilt</li>
+                    <li>Have clear portion sizes</li>
+                    <li>Understand carbohydrates in a simple way</li>
+                    <li>Reduce unnecessary spikes</li>
+                    <li>Maintain the cultural ritual (coffee + dessert)</li>
+                    <li>Eat with your family without feeling like "the sick one"</li>
+                </ul>
+                <a href="#compra" class="cta-btn">I want to make delicious recipes</a>
+            </div>
+            <div class="app-phone">
+                <img src="images/CELULAR.webp" alt="Clean Sweet App on phone">
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="test-grid">
+                <div class="test-card">
+                    <img src="images/tes1.webp" alt="Laura M.">
+                    <blockquote>"I thought I would never eat desserts again without fear. Now I know exactly how much I
+                        can eat."</blockquote>
+                    <p class="author">Laura M., Medell&iacute;n</p>
+                </div>
+                <div class="test-card">
+                    <img src="images/tes2.webp" alt="José R.">
+                    <blockquote>"It helped me understand that the problem wasn't just sugar. I learned how to control my
+                        portions."</blockquote>
+                    <p class="author">Jos&eacute; R., CDMX</p>
+                </div>
+                <div class="test-card">
+                    <img src="images/tes3.webp" alt="Mariana G.">
+                    <blockquote>"The best part is that my family eats the same things I do. I don't feel different."
+                    </blockquote>
+                    <p class="author">Mariana G., Guadalajara</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BONUSES -->
+    <section class="bonuses">
+        <div class="container">
+            <h2>Launch Bonuses</h2>
+            <div class="bonus-grid">
+                <div class="bonus-card">
+                    <img src="images/B1.webp" alt="Golden Tea Recipe">
+                    <div class="bonus-info">
+                        <h3>The golden tea recipe, which can reduce fasting blood sugar by up to 40 points in less than
+                            14 days.</h3>
+                        <p class="bonus-price">$9.90</p>
+                        <p class="bonus-free">FREE!</p>
+                    </div>
+                </div>
+                <div class="bonus-card">
+                    <img src="images/B2.webp" alt="Blacklist of Medications">
+                    <div class="bonus-info">
+                        <h3>The blacklist of medications and supplements that raise blood sugar the most &mdash; and
+                            that most people take without knowing&hellip;</h3>
+                        <p class="bonus-price">$9.90</p>
+                        <p class="bonus-free">FREE!</p>
+                    </div>
+                </div>
+                <div class="bonus-card">
+                    <img src="images/B33.webp" alt="Metabolic Recipes">
+                    <div class="bonus-info">
+                        <h3>Metabolic Recipes That Help Reduce Inflammation and Support Weight Loss</h3>
+                        <p class="bonus-price">$19.90</p>
+                        <p class="bonus-free">FREE!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- OFFER -->
+    <section class="offer" id="compra">
+        <div class="container">
+            <h2>Today's Offer</h2>
+            <div class="countdown">
+                <div class="countdown-item">
+                    <span class="num" id="minutes">00</span>
+                    <span class="label">Minutes</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="num" id="seconds">00</span>
+                    <span class="label">Seconds</span>
+                </div>
+            </div>
+            <h3>Eat Without Fear Again</h3>
+            <h2>Clean Sweet App</h2>
+            <div class="price-box">
+                <p class="price-old">$69.90</p>
+                <p class="price-new">$ 27</p>
+                <p class="price-note">Pay only once today:</p>
+                <ul class="offer-list">
+                    <li>App with more than 400 recipes for diabetics</li>
+                    <li>Constant updates</li>
+                    <li>Built-in portion calculator</li>
+                    <li>Automatic grocery list</li>
+                    <li>Bonus: Metabolic Recipes</li>
+                    <li>Bonus: The Blacklist of Medications and Supplements</li>
+                    <li>Bonus: The Golden Tea Recipe</li>
+                </ul>
+                <a href="https://pay.hotmart.com/P104899219T?off=5tpbk1a1" class="cta-btn">I WANT MY ACCESS NOW</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- GUARANTEE -->
+    <section class="guarantee">
+        <div class="container">
+            <img src="images/7-days.webp" alt="7-Day Guarantee">
+            <h2>7-DAY FULL GUARANTEE</h2>
+            <p>Try the app for 7 days.</p>
+            <p>If you don't like it&hellip; If you feel it's not for you&hellip; If you don't notice a
+                difference&hellip;</p>
+            <p><strong>We'll refund 100% of your money.</strong></p>
+            <p>No questions asked. No complications.</p>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <div class="faq-question">Is it a one-time payment or a subscription?</div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        It's a <strong>one-time payment of $27</strong>. There are no monthly fees. No automatic
+                        renewals. No hidden charges. You pay once and the access is yours.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">How do I receive access?</div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Once your payment is confirmed, Hotmart will automatically send you an email with your app
+                        access details. Just check your inbox (and your spam folder if necessary), and you'll be able to
+                        access it immediately.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Where can I access it from?</div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        You can access it from your phone, tablet, or computer, anytime and from anywhere.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">How do I make the payment?</div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Payment is processed 100% securely through Hotmart, one of the most recognized and trusted
+                        digital platforms on the market. You can pay with credit card, debit card, and other methods
+                        available depending on your country.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">How long do I have access?</div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Access is complete and has no expiration date. You will also receive all future updates at no
+                        additional cost.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">What if I don't like it?</div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        You have a 7-day guarantee. If you're not satisfied, you can request a refund directly within
+                        the established period. No complications.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(q => {
+            q.addEventListener('click', () => {
+                const item = q.parentElement;
+                const answer = q.nextElementSibling;
+                const isActive = item.classList.contains('active');
+                document.querySelectorAll('.faq-item').forEach(i => {
+                    i.classList.remove('active');
+                    i.querySelector('.faq-answer').style.maxHeight = null;
+                });
+                if (!isActive) {
+                    item.classList.add('active');
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                }
+            });
+        });
+
+        // Countdown Timer (15 minutes loop)
+        function startCountdown() {
+            var totalSeconds = 15 * 60;
+            var saved = sessionStorage.getItem('cs_countdown');
+            if (saved) {
+                var elapsed = Math.floor((Date.now() - parseInt(saved)) / 1000);
+                totalSeconds = Math.max(0, 15 * 60 - elapsed);
+            } else {
+                sessionStorage.setItem('cs_countdown', Date.now().toString());
+            }
+            function tick() {
+                var m = Math.floor(totalSeconds / 60);
+                var s = totalSeconds % 60;
+                document.getElementById('minutes').textContent = m < 10 ? '0' + m : m;
+                document.getElementById('seconds').textContent = s < 10 ? '0' + s : s;
+                if (totalSeconds > 0) { totalSeconds--; setTimeout(tick, 1000); }
+            }
+            tick();
+        }
+        startCountdown();
+    </script>
+</body>
+
+</html>
