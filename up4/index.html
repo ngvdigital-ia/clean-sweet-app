@@ -126,6 +126,36 @@
     font-family:'Barlow Condensed', sans-serif;
     font-size:1.15rem;
   }
+  .price-card{
+    background:var(--red-tint);
+    border:2px solid var(--red);
+    border-radius:12px;
+    padding:30px 26px;
+    text-align:center;
+  }
+  .price-card .price-label{
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight:700;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    font-size:.9rem;
+    color:var(--black);
+    margin-bottom:10px;
+  }
+  .price-card .price-value{
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight:800;
+    color:var(--red);
+    font-size:clamp(2.6rem, 9vw, 3.6rem);
+    line-height:1;
+    margin-bottom:10px;
+  }
+  .price-card .price-sub{
+    font-family:'Lora', serif;
+    font-size:1rem;
+    color:var(--black);
+    margin:0;
+  }
   .cta-block{
     padding:38px 0 30px;
     display:flex;
@@ -253,6 +283,13 @@
       <h2 class="section-title">The choice is yours</h2>
       <p>Option one. You grab Clean Reset right now. The next time you step outside your planned meal — and you will, that's just being human — you'll know exactly what to do in the twenty minutes after. No panic, no guilt, no punishing yourself.</p>
       <p>Option two. You skip Clean Reset today. The recipes are still yours, and they're still powerful. Don't doubt that for a second. But the next time you step outside the plan, you'll be on your own in that moment, not knowing what to do, just waiting out the spike and feeling awful for the rest of the day.</p>
+    </section>
+    <section class="copy-block">
+      <div class="price-card">
+        <p class="price-label">Your investment today</p>
+        <p class="price-value">$27</p>
+        <p class="price-sub">One payment · Lifetime access</p>
+      </div>
     </section>
     <section class="cta-block">
       <a href="#" class="cta-yes">YES, give me Clean Reset now — lock in my 20-minute protocol</a>
