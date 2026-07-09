@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clean Reset</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --white:#ffffff;
+    --black:#111111;
+    --red:#d6001c;
+    --red-dark:#a10015;
+    --red-tint:#fdf0f1;
+  }
+  *{ box-sizing:border-box; }
+  html{ -webkit-text-size-adjust:100%; }
+  body{
+    margin:0;
+    background:var(--white);
+    color:var(--black);
+    font-family:'Lora', serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1, h2{
+    font-family:'Barlow Condensed', sans-serif;
+    color:var(--black);
+    margin:0;
+  }
+  p{ margin:0 0 1.25em 0; }
+  .attention-bar{
+    background:var(--red);
+    color:var(--white);
+    text-align:center;
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight:700;
+    letter-spacing:.01em;
+    font-size:clamp(.85rem, 2.4vw, 1.05rem);
+    line-height:1.5;
+    padding:14px 20px;
+  }
+  .page{
+    max-width:680px;
+    margin:0 auto;
+    padding:0 22px;
+  }
+  .hero{
+    position:relative;
+    text-align:center;
+    padding:56px 0 36px;
+    overflow:hidden;
+  }
+  .hero-numeral{
+    position:absolute;
+    top:-40px;
+    left:50%;
+    transform:translateX(-50%);
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight:800;
+    font-size:min(60vw, 320px);
+    color:var(--red);
+    opacity:.07;
+    line-height:1;
+    z-index:0;
+    pointer-events:none;
+    user-select:none;
+  }
+  .headline{
+    position:relative;
+    z-index:1;
+    font-weight:800;
+    font-size:clamp(1.9rem, 5.4vw, 3.1rem);
+    line-height:1.15;
+    letter-spacing:-.01em;
+  }
+  .headline .highlight{ color:var(--red); }
+  .subheadline-hero{
+    position:relative;
+    z-index:1;
+    font-family:'Lora', serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:clamp(1.05rem, 2.6vw, 1.3rem);
+    color:var(--black);
+    margin-top:20px;
+  }
+  .copy-block{ padding:30px 0; }
+  .copy-block p{ font-size:1.08rem; }
+  .section-title{
+    font-weight:700;
+    font-size:clamp(1.3rem, 3.4vw, 1.65rem);
+    line-height:1.25;
+    margin-bottom:18px;
+  }
+  .section-title::before{
+    content:'';
+    display:block;
+    width:38px;
+    height:4px;
+    background:var(--red);
+    margin-bottom:14px;
+  }
+  .bullets-block{
+    background:var(--red-tint);
+    border-radius:10px;
+    padding:28px 26px;
+  }
+  .bullet-list{ list-style:none; margin:0; padding:0; }
+  .bullet-list li{
+    position:relative;
+    padding-left:32px;
+    margin-bottom:16px;
+    font-size:1.05rem;
+  }
+  .bullet-list li:last-child{ margin-bottom:0; }
+  .bullet-list li::before{
+    content:'✓';
+    position:absolute;
+    left:0;
+    top:0;
+    color:var(--red);
+    font-weight:700;
+    font-family:'Barlow Condensed', sans-serif;
+    font-size:1.15rem;
+  }
+  .cta-block{
+    padding:38px 0 30px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:14px;
+  }
+  .cta-yes, .cta-no{
+    width:100%;
+    max-width:480px;
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight:800;
+    text-align:center;
+    cursor:pointer;
+    letter-spacing:.01em;
+    border-radius:6px;
+    text-decoration:none;
+    display:block;
+  }
+  .cta-yes{
+    background:var(--red);
+    color:var(--white);
+    border:2px solid var(--red);
+    padding:20px 22px;
+    font-size:clamp(1rem, 2.8vw, 1.2rem);
+    box-shadow:0 6px 16px rgba(214,0,28,.28);
+  }
+  .cta-yes:hover{ background:var(--red-dark); border-color:var(--red-dark); }
+  .cta-no{
+    background:var(--white);
+    color:var(--black);
+    border:2px solid var(--black);
+    padding:14px 20px;
+    font-size:clamp(.85rem, 2.2vw, .95rem);
+  }
+  .cta-no:hover{ background:var(--black); color:var(--white); }
+  .ps-block{ border-top:2px solid var(--red); padding:26px 0 50px; }
+  .ps-block p{ font-style:italic; font-size:.98rem; color:var(--black); margin:0; }
+  @media (max-width:480px){
+    .hero{ padding:44px 0 28px; }
+    .copy-block{ padding:24px 0; }
+  }
+</style>
+</head>
+<body>
+  <div class="attention-bar">
+    ⚠ WAIT. DON'T CLOSE THIS PAGE YET. Your access is still processing, and what you're about to read might matter more than everything you just got.
+  </div>
+  <main class="page">
+    <section class="hero">
+      <span class="hero-numeral" aria-hidden="true">20</span>
+      <h1 class="headline">There's a <span class="highlight">20-minute window</span> right after you eat that decides whether that meal turns into a <span class="highlight">blood sugar spike</span> — or nothing at all. And almost nobody with diabetes knows this window even exists.</h1>
+      <p class="subheadline-hero">It's not about what you ate. It's about what you do in the 20 minutes after. And that changes everything.</p>
+    </section>
+    <section class="copy-block">
+      <p>You just joined a small group of people. Most folks buy a recipe, use it twice, and forget about it. Not you. You made it this far because you actually want to fix this, not just paper over it.</p>
+      <p>That's why I need to tell you something before you leave this page.</p>
+    </section>
+    <section class="copy-block">
+      <h2 class="section-title">One quick question before you go</h2>
+      <p>Let me ask you something. Think back to the last time you ate off-plan. Doesn't matter why. Somebody's birthday, dinner at your mother-in-law's, a family trip, or just one of those days you couldn't hold out anymore.</p>
+      <p>What did you do right after?</p>
+      <p>If the answer is "nothing," or "I just froze," I need to show you something nobody's told you yet.</p>
+    </section>
+    <section class="copy-block">
+      <h2 class="section-title">The problem nobody warned you about</h2>
+      <p>You have the recipes. You know how to cook it right. But there's a moment no recipe can cover, because no recipe can predict it: the moment you step off the plan.</p>
+      <p>This isn't hypothetical. It's going to happen. A birthday party, a get-together, a trip, or just a day you got too tired to calculate everything.</p>
+      <p>And that's exactly when most people with diabetes freeze. They eat the wrong plate, feel the guilt hit, and do absolutely nothing in the minutes right after. They just wait it out. They just hope. And the spike runs its full course, with nobody stepping in to soften it.</p>
+      <p>Even worse, after the spike comes the second mistake. They punish themselves. Skip the next meal thinking it'll even things out. Push through a workout that's way too intense, thinking it'll "burn off" what they ate. By the end of the day, the damage is bigger than the plate that started it.</p>
+    </section>
+    <section class="copy-block">
+      <h2 class="section-title">The math nobody does</h2>
+      <p>A poorly managed spike usually takes two to three hours to come back down. Now think about how many times a month you step outside your planned meal — a family dinner, a party, a rough day.</p>
+      <p>Three, four times. Sometimes more.</p>
+      <p>That's six to twelve hours a month where your body is on its own trying to recover, with zero help from you, while you're too busy feeling guilty to actually do anything about it.</p>
+      <p>Twelve hours a month of feeling awful that maybe didn't even have to happen.</p>
+    </section>
+    <section class="copy-block">
+      <h2 class="section-title">I've watched this happen up close, more than once</h2>
+      <p>I've seen this play out with so many of my students. Women who did everything right all week. Knew exactly what to cook, had the right recipe right in hand.</p>
+      <p>Then their mom's birthday came around, or family was in town, or they were traveling — and they froze. They ate off-plan and had no idea what to do next. They'd spend the rest of the day drowning in guilt, skipping the next meal, sliding into that punishment mode that only makes everything worse.</p>
+      <p>And this is way more common than you'd think. It's not a willpower problem. Nobody ever gave you a plan for that exact moment.</p>
+    </section>
+    <section class="copy-block">
+      <h2 class="section-title">That's why I built this</h2>
+      <p>That's why I decided to create something nobody else in this space is offering. It's not another recipe. It's not an ingredient swap.</p>
+      <p>It's a protocol for the first twenty minutes after the plate. For the exact moment everyone freezes and does nothing.</p>
+    </section>
+    <section class="copy-block">
+      <h2 class="section-title">Introducing Clean Reset</h2>
+      <p>It's called Clean Reset — The 20-Minute Undo Protocol.</p>
+      <p>Three simple steps, in this exact order, done in the first twenty to thirty minutes after you eat anything off-plan. A light movement, timed a specific way. A simple food trigger you probably already have at home. A breathing pattern that takes under two minutes.</p>
+      <p>Three steps. Done in the exact window your body is still absorbing that meal — before the spike gets to run its full course on its own.</p>
+      <p>No extra medication. No skipping your next meal. No punishing yourself.</p>
+    </section>
+    <section class="copy-block bullets-block">
+      <h2 class="section-title">What you'll walk away with</h2>
+      <p>With Clean Reset, you get:</p>
+      <ul class="bullet-list">
+        <li>A three-step protocol to use in the first twenty minutes after any off-plan meal</li>
+        <li>A quick-reference chart of food triggers by type of off-plan meal — sweets, heavy carbs, rich savory dishes</li>
+        <li>The exact breathing pattern, fully timed, you can do anywhere, even right at the table</li>
+        <li>A pocket summary card for your wallet or phone, so you can check it in seconds without opening the whole app</li>
+        <li>Step-by-step guidance for specific situations: birthday parties, restaurant dinners, travel, family holidays</li>
+        <li>The reason skipping your next meal makes things worse, and exactly what to do instead</li>
+        <li>Lifetime access, including any future updates to the protocol</li>
+      </ul>
+    </section>
+    <section class="copy-block">
+      <h2 class="section-title">What happened when I used it myself</h2>
+      <p>I live this too. After my own birthday party, I had a slice of cake that wasn't part of my plan. It used to be, I'd spend the rest of the day feeling awful, counting the hours until my blood sugar came back down, skipping dinner out of guilt.</p>
+      <p>This time I ran the three steps in the first twenty minutes. Nothing drastic, nothing complicated. And the rest of my day just... stayed normal. No dragged-out feeling sick, no guilt eating away at my dinner.</p>
+      <p>It was the first time one slip-up didn't ruin the rest of my day.</p>
+    </section>
+    <section class="copy-block">
+      <h2 class="section-title">About the investment</h2>
+      <p>A one-off session with a nutritionist to build a protocol like this runs about a hundred and fifty dollars, on average. And even then, most of them won't tell you what to do in the twenty minutes after you eat — they'll tell you what to avoid eating, which you already know.</p>
+      <p>But since you already took the step of taking control of your eating today, I don't want to charge you that.</p>
+      <p>Clean Reset is twenty-seven dollars. One payment. Lifetime access.</p>
+      <p>If this stops just one poorly managed spike a month, you've already made that back in feeling better, having more energy, and not losing your whole afternoon to feeling sick over one plate.</p>
+      <p>This offer is exclusive to this page. Once you leave, it's gone — same as the offers before it.</p>
+    </section>
+    <section class="copy-block">
+      <h2 class="section-title">The choice is yours</h2>
+      <p>Option one. You grab Clean Reset right now. The next time you step outside your planned meal — and you will, that's just being human — you'll know exactly what to do in the twenty minutes after. No panic, no guilt, no punishing yourself.</p>
+      <p>Option two. You skip Clean Reset today. The recipes are still yours, and they're still powerful. Don't doubt that for a second. But the next time you step outside the plan, you'll be on your own in that moment, not knowing what to do, just waiting out the spike and feeling awful for the rest of the day.</p>
+    </section>
+    <section class="cta-block">
+      <a href="#" class="cta-yes">YES, give me Clean Reset now — lock in my 20-minute protocol</a>
+      <a href="#" class="cta-no">NO, I'll take my chances not knowing what to do after a slip-up</a>
+    </section>
+    <section class="ps-block">
+      <p><strong>P.S.</strong> — Last week one of my students wrote to me. She'd gone to a family dinner, eaten something off her plan, and spent the whole night feeling sick and guilty with no idea what to do. She'd seen this page before and told herself she'd deal with it later. Don't put it off. Grab Clean Reset now, before your next slip-up happens — because it will happen, and the only question is whether you'll be ready for it.</p>
+    </section>
+  </main>
+</body>
+</html>
