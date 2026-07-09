@@ -6,7 +6,7 @@
 <meta name="description" content="Special one-time offer for Clean Bake — available only on this page.">
 <title>Clean Bake — Special Offer</title>
 <!-- clone fiel de https://panaderiacero.com/ces-up2-f2-clean-bakes/ (single-file + scroll capture, 2026-07-08) -->
-<!-- dns-prefetch: player VTurb (pendente, ver TODO abaixo) -->
+<!-- dns-prefetch: player VTurb -->
 <link rel="dns-prefetch" href="https://cdn.converteai.net">
 <link rel="dns-prefetch" href="https://scripts.converteai.net">
 <link rel="dns-prefetch" href="https://images.converteai.net">
@@ -38,6 +38,7 @@
   .subscription-note .body{font-size:14px;color:#4b5563;line-height:1.5}
   .cta-wrap{max-width:520px;margin:24px auto 40px;padding:0 16px;text-align:center}
   .cta-yes{display:block;width:100%;background:linear-gradient(135deg,#EE9A0E,#c00307);color:#fff;font-weight:900;font-size:18px;text-transform:uppercase;letter-spacing:.3px;text-decoration:none;padding:18px 20px;border-radius:14px;box-shadow:0 14px 32px rgba(192,3,7,.28)}
+  .esconder{display:none}
 </style>
 </head>
 <body>
@@ -51,22 +52,13 @@
     <div class="corner"></div>
   </div>
 
-  <!--
-    TODO video pendente: arquivo "UpSell2-CleanSweets-$49-04;41.mp4" ainda nao subiu no VTurb.
-    Quando subir: trocar o bloco .video-placeholder pelo <vturb-smartplayer id="vid-PLACEHOLDER" ...>
-    com o account ID fixo do projeto (00c3b583-8874-4e64-a32e-65f6dd9ba521) + script player.js,
-    e reativar o gate de revelacao pos-pitch abaixo (o original usa delaySeconds=269 antes de
-    revelar a oferta via player.displayHiddenElements(delaySeconds, [".esconder"], {persist:true})
-    ligado ao evento "player:ready" do player especifico -- NAO usar seletor amplo).
-  -->
+  <!-- vídeo VTurb (UpSell2-CleanSweets-$49) + gate de reveal pós-pitch aos 269s no fim do body -->
   <div class="video-wrap">
-    <div class="video-placeholder">
-      <div class="msg">[ vídeo pendente — falta subir no VTurb ]</div>
-    </div>
+    <vturb-smartplayer id="vid-6a4ed8c0a03f89d644db509b" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"><div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 178.05555555555554% 0 0; z-index: 0; background-color: black;"></div></vturb-smartplayer>
+    <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/00c3b583-8874-4e64-a32e-65f6dd9ba521/players/6a4ed8c0a03f89d644db509b/v4/player.js", s.async=!0,document.head.appendChild(s); </script>
   </div>
 
-  <!-- TODO: quando o video estiver ativo, envolver o bloco abaixo com class="esconder" e religar o gate -->
-  <div class="offer-card">
+  <div class="offer-card esconder">
     <div class="badge">Special Offer Only On This Page</div>
     <div class="reg-label">Regular price</div>
     <div class="reg-price">$49.90 USD</div>
@@ -79,8 +71,26 @@
     </div>
   </div>
 
-  <div class="cta-wrap">
+  <div class="cta-wrap esconder">
     <a href="#" class="cta-yes">Get Clean Bake now — $27</a>
   </div>
+
+  <script>
+  /* Reveal pos-pitch via API oficial do VTurb (displayHiddenElements) — pitch aos 269s (do original).
+     ?reveal=1 / ?preview=1 mostra tudo pra revisao. */
+  (function(){
+    function showAll(){document.querySelectorAll('.esconder').forEach(function(e){e.style.display='block'});}
+    window.__revealPitch=showAll;
+    if(/[?&](reveal|preview)=1/.test(location.search)){showAll();return;}
+    function arm(){
+      var pl=document.querySelector('vturb-smartplayer');
+      if(!pl)return setTimeout(arm,300);
+      function schedule(){try{pl.displayHiddenElements(269,['.esconder'],{persist:true});}catch(e){}}
+      pl.addEventListener('player:ready',schedule);
+      if(typeof pl.displayHiddenElements==='function')schedule();
+    }
+    arm();
+  })();
+  </script>
 </body>
 </html>

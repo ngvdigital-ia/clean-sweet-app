@@ -7,7 +7,7 @@
 <title>Glucofeed — Member Offer</title>
 <!-- clone fiel de https://panaderiacero.com/ces-up3-tiktok-glucofy/ (single-file + scroll capture, 2026-07-08) -->
 <!-- nome do produto trocado de "Glucofy"/"Glicofy" (original) para "Glucofeed" (nosso produto) -->
-<!-- dns-prefetch: player VTurb (pendente, ver TODO abaixo) -->
+<!-- dns-prefetch: player VTurb -->
 <link rel="dns-prefetch" href="https://cdn.converteai.net">
 <link rel="dns-prefetch" href="https://scripts.converteai.net">
 <link rel="dns-prefetch" href="https://images.converteai.net">
@@ -36,33 +36,25 @@
   .urgency{background:rgba(255,255,255,.7);border-radius:12px;padding:10px 14px;font-size:12px;color:rgba(0,0,0,.55);line-height:1.6;border:1px solid rgba(238,154,14,.18)}
   .cta-wrap{max-width:520px;margin:20px auto 40px;padding:0 16px}
   .cta-yes{display:block;width:100%;background:linear-gradient(135deg,#EE9A0E,#c00307);color:#fff;font-weight:900;font-size:18px;text-transform:uppercase;letter-spacing:.3px;text-decoration:none;padding:18px 20px;border-radius:14px;box-shadow:0 14px 32px rgba(192,3,7,.28);text-align:center}
+  .esconder{display:none}
 </style>
 </head>
 <body>
   <h2>Wait! Your purchase is not yet complete. Don't close this page before seeing this.</h2>
 
-  <!--
-    TODO video pendente: arquivo "UpSell3-CleanSweets-$17-08;57.mp4" ainda nao subiu no VTurb.
-    Quando subir: trocar o bloco .video-placeholder pelo <vturb-smartplayer id="vid-PLACEHOLDER" ...>
-    com o account ID fixo do projeto (00c3b583-8874-4e64-a32e-65f6dd9ba521) + script player.js,
-    e reativar o gate de revelacao pos-pitch abaixo (o original usa delaySeconds=480 antes de
-    revelar a oferta via player.displayHiddenElements(delaySeconds, [".esconder"], {persist:true})
-    ligado ao evento "player:ready" do player especifico -- NAO usar seletor amplo).
-  -->
+  <!-- vídeo VTurb (UpSell3-CleanSweets-$17) + gate de reveal pós-pitch aos 480s no fim do body -->
   <div class="video-wrap">
-    <div class="video-placeholder">
-      <div class="msg">[ vídeo pendente — falta subir no VTurb ]</div>
-    </div>
+    <vturb-smartplayer id="vid-6a4ed9d1b835accf5151d68a" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"><div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 178.05555555555554% 0 0; z-index: 0; background-color: black;"></div></vturb-smartplayer>
+    <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/00c3b583-8874-4e64-a32e-65f6dd9ba521/players/6a4ed9d1b835accf5151d68a/v4/player.js", s.async=!0,document.head.appendChild(s); </script>
   </div>
 
-  <!-- TODO: quando o video estiver ativo, envolver os blocos abaixo com class="esconder" e religar o gate -->
-  <div style="max-width:400px;margin:0 auto;padding:0 16px">
+  <div class="esconder" style="max-width:400px;margin:0 auto;padding:0 16px">
     <a href="#" class="cta-yes-top">YES, I WANT GLUCOFEED</a>
   </div>
 
-  <h2>Try it for 7 days and if you don't like it, cancel and we won't charge you anything.</h2>
+  <h2 class="esconder">Try it for 7 days and if you don't like it, cancel and we won't charge you anything.</h2>
 
-  <div class="offer-card">
+  <div class="offer-card esconder">
     <div class="tag">Exclusive offer — this page only</div>
     <div class="reg-label">Regular price outside this page</div>
     <div class="reg-price">$37.90 / month</div>
@@ -76,8 +68,26 @@
     <div class="urgency">⏳ <strong>This price disappears when you leave this page.</strong><br>Once you close it, the offer is gone — no email, no second chance.</div>
   </div>
 
-  <div class="cta-wrap">
+  <div class="cta-wrap esconder">
     <a href="#" class="cta-yes">Get Glucofeed now — $17.90/mo</a>
   </div>
+
+  <script>
+  /* Reveal pos-pitch via API oficial do VTurb (displayHiddenElements) — pitch aos 480s (do original).
+     ?reveal=1 / ?preview=1 mostra tudo pra revisao. */
+  (function(){
+    function showAll(){document.querySelectorAll('.esconder').forEach(function(e){e.style.display='block'});}
+    window.__revealPitch=showAll;
+    if(/[?&](reveal|preview)=1/.test(location.search)){showAll();return;}
+    function arm(){
+      var pl=document.querySelector('vturb-smartplayer');
+      if(!pl)return setTimeout(arm,300);
+      function schedule(){try{pl.displayHiddenElements(480,['.esconder'],{persist:true});}catch(e){}}
+      pl.addEventListener('player:ready',schedule);
+      if(typeof pl.displayHiddenElements==='function')schedule();
+    }
+    arm();
+  })();
+  </script>
 </body>
 </html>
