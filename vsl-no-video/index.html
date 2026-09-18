@@ -7,15 +7,22 @@
     <!-- NGV carimbo de variante - inline, zero rede, roda ANTES de qualquer pixel -->
     <script>
     (function(){
-      var NGV_VARIANT = "a";                 // a|b|c - unico valor que muda entre as variantes
-      var NGV_OFFER   = "clean-sweet-app";   // slug da oferta, fixo por projeto
+      var NGV_VARIANT   = "a";                 // a|b|c - unico valor que muda entre as variantes
+      var NGV_OFFER     = "clean-sweet-app";   // slug da oferta, fixo por projeto
+      var NGV_HAS_VIDEO = false;               // esta pagina nao tem player - ver nota do src
       try {
         var u = new URL(location.href);
         // sck da Hotmart: teto de 30 chars. A VARIANTE VEM PRIMEIRO de proposito:
         // se truncar, corta o slug e nunca a variante (9 slugs do repo estouram 30).
-        var sck = ("v" + NGV_VARIANT + "|" + NGV_OFFER).slice(0, 30);
-        if (!u.searchParams.get("sck"))         u.searchParams.set("sck", sck);
+        var marca = ("v" + NGV_VARIANT + "|" + NGV_OFFER).slice(0, 30);
+        if (!u.searchParams.get("sck"))         u.searchParams.set("sck", marca);
         if (!u.searchParams.get("utm_content")) u.searchParams.set("utm_content", NGV_VARIANT);
+        // src leva a MESMA marca porque o relatorio da UTMify agrupa por bySrc e
+        // nao tem bySck: so no sck a variante nao vira placar. Em pagina COM player
+        // o src e do VTurb (v3_<uuid>_..._t-11_s-1) e nao pode ser tocado - por isso
+        // a comparacao estrita com false: qualquer outro valor (inclusive a string
+        // "false") cai pro lado seguro e deixa o src quieto.
+        if (NGV_HAS_VIDEO === false && !u.searchParams.get("src")) u.searchParams.set("src", marca);
         if (u.search !== location.search) history.replaceState(null, "", u.pathname + u.search + location.hash);
       } catch (e) { /* nunca bloqueia a pagina */ }
     })();
