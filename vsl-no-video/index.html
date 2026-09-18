@@ -12,9 +12,11 @@
       var NGV_HAS_VIDEO = false;               // esta pagina nao tem player - ver nota do src
       try {
         var u = new URL(location.href);
-        // sck da Hotmart: teto de 30 chars. A VARIANTE VEM PRIMEIRO de proposito:
-        // se truncar, corta o slug e nunca a variante (9 slugs do repo estouram 30).
-        var marca = ("v" + NGV_VARIANT + "|" + NGV_OFFER).slice(0, 30);
+        // Teto real: 255 (doc do webhook 1.0 da Hotmart). Os "30 chars" sao dica de
+        // legibilidade do help center, nao limite de API. Com prevent-xcod-sck a
+        // UTMify passa o sck verbatim, sem truncar. A VARIANTE VEM PRIMEIRO mesmo
+        // assim: o comportamento de corte do gateway nao esta documentado.
+        var marca = ("v" + NGV_VARIANT + "|" + NGV_OFFER).slice(0, 255);
         if (!u.searchParams.get("sck"))         u.searchParams.set("sck", marca);
         if (!u.searchParams.get("utm_content")) u.searchParams.set("utm_content", NGV_VARIANT);
         // src leva a MESMA marca porque o relatorio da UTMify agrupa por bySrc e
