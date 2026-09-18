@@ -4,6 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- NGV carimbo de variante - inline, zero rede, roda ANTES de qualquer pixel -->
+    <script>
+    (function(){
+      var NGV_VARIANT = "a";                 // a|b|c - unico valor que muda entre as variantes
+      var NGV_OFFER   = "clean-sweet-app";   // slug da oferta, fixo por projeto
+      try {
+        var u = new URL(location.href);
+        // sck da Hotmart: teto de 30 chars. A VARIANTE VEM PRIMEIRO de proposito:
+        // se truncar, corta o slug e nunca a variante (9 slugs do repo estouram 30).
+        var sck = ("v" + NGV_VARIANT + "|" + NGV_OFFER).slice(0, 30);
+        if (!u.searchParams.get("sck"))         u.searchParams.set("sck", sck);
+        if (!u.searchParams.get("utm_content")) u.searchParams.set("utm_content", NGV_VARIANT);
+        if (u.search !== location.search) history.replaceState(null, "", u.pathname + u.search + location.hash);
+      } catch (e) { /* nunca bloqueia a pagina */ }
+    })();
+    </script>
     <meta name="description" content="Clean Sweets - Eat Desserts Without Guilt. Sugar-free, diabetic-friendly dessert recipes.">
     <link rel="dns-prefetch" href="//cdn.utmify.com.br">
     <link rel="dns-prefetch" href="//connect.facebook.net">
@@ -1230,6 +1246,7 @@ src="https://www.facebook.com/tr?id=914442448360779&ev=PageView&noscript=1"/></n
         }
         startCountdown();
     </script>
+  <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
 </body>
 
 </html>
