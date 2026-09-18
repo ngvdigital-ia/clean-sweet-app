@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Redirecting…</title>
+
+<!-- ============================================================
+     NGV — SPLITTER DE TRAFEGO (1 link -> N variantes)
+     ============================================================
+     Esta pagina NAO carimba nada. Ela so redireciona.
+     Quem grava o sck e a pagina de DESTINO (carimbo-variante.html),
+     que ja tem a variante hardcoded na propria pagina — de proposito, pra manter o
+     gate check_variant_stamp do qa-clone.py funcionando sem alteracao.
+
+     CONFIG SINCRONA, DE PROPOSITO (decisao de arquitetura):
+     o bloco NGV_SPLIT abaixo e um ESPELHO EXATO de split.json e e
+     o que decide o redirect. Nada de fetch(): `location.replace()`
+     no <head> aborta o documento e cancela qualquer fetch pendente,
+     entao um fetch so poderia ADIAR o redirect (RTT + timeout), nunca
+     enriquece-lo. Em trafego pago latencia no splitter e conversao
+     perdida. split.json fica no ar como fonte de verdade declarativa
+     pro tooling/humano e como contrato do schema.
+
+     DRIFT: ao editar split.json, espelhe o bloco abaixo. Checagem:
+       python3 - <<'PY'
+       import json,re
+       h=open('vsl-no-video-go/index.html').read()
+       b=re.search(r'/\* SPLIT_CONFIG_START \*/\s*var NGV_SPLIT = (.*?);\s*/\* SPLIT_CONFIG_END \*/',h,re.S).group(1)
+       assert json.loads(b)==json.load(open('vsl-no-video-go/split.json')), 'DRIFT'
+       print('espelho OK')
+       PY
+
+     VARIANTES NOVAS: acrescente em split.json E no bloco abaixo, ex.:
+       { "id": "b", "path": "/vsl-no-video-b/", "weight": 1 },
+       { "id": "c", "path": "/vsl-no-video-c/", "weight": 1 }
+     So adicione uma variante DEPOIS que a pasta dela existir — variante
+     apontando pra pasta inexistente vira 404 em trafego pago.
+     ============================================================ -->
+<script>
+/* SPLIT_CONFIG_START */
+var NGV_SPLIT = {
+  "schema": "ngv-splitter.v1",
+  "offer": "clean-sweet-app",
+  "variants": [
+    { "id": "a", "path": "/vsl-no-video/", "weight": 1 }
+  ],
+  "updatedAt": "2026-09-18"
+};
+/* SPLIT_CONFIG_END */
+</script>
+<script>
+(function () {
+  "use strict";
+
+  // Fail-safe absoluto: vale mesmo se NGV_SPLIT sumir ou vier quebrado.
+  var FALLBACK_PATH = "/vsl-no-video/";
+  var COOKIE_DAYS   = 30;
+  var BOT_RE        = /bot|crawl|spider|facebookexternalhit|preview|lighthouse|headless/i;
+
+  // PASSTHROUGH CRU: string literal, sem URL/URLSearchParams, sem re-encodar.
+  // A UTMify escreve `utm_content` com `::fbclid::` e qualquer round-trip
+  // re-encoda o %3A%3A e quebra o que ela espera do outro lado.
+  var QUERY = location.search + location.hash;
+
+  function go(path) {
+    var target = path || FALLBACK_PATH;
+    // Guarda anti-loop: splitter apontando pra si mesmo recarregaria pra sempre.
+    if (target === location.pathname) return;
+    location.replace(target + QUERY);
+  }
+
+  try {
+    var cfg = (typeof NGV_SPLIT !== "undefined" && NGV_SPLIT) || null;
+    var raw = (cfg && Object.prototype.toString.call(cfg.variants) === "[object Array]") ? cfg.variants : [];
+
+    var variants = [];
+    for (var i = 0; i < raw.length; i++) {
+      var v = raw[i];
+      if (v && typeof v.id === "string" && v.id && typeof v.path === "string" && v.path) variants.push(v);
+    }
+    if (!variants.length) { go(FALLBACK_PATH); return; }
+
+    function byId(id) {
+      for (var j = 0; j < variants.length; j++) if (variants[j].id === id) return variants[j];
+      return null;
+    }
+
+    // Variante segura: "a" quando existe, senao a primeira declarada.
+    var safe = byId("a") || variants[0];
+
+    // GUARDA DE BOT — crawler nao pode envenenar o split:
+    // vai pra variante segura, sem cookie e sem entrar no sorteio.
+    var ua = (navigator && navigator.userAgent) || "";
+    if ((navigator && navigator.webdriver === true) || BOT_RE.test(ua)) { go(safe.path); return; }
+
+    var COOKIE = "ngv_variant_" + (typeof cfg.offer === "string" && cfg.offer ? cfg.offer : "offer");
+
+    function readCookie(name) {
+      var jar = document.cookie ? document.cookie.split(";") : [];
+      for (var k = 0; k < jar.length; k++) {
+        var eq = jar[k].indexOf("=");
+        if (eq < 0) continue;
+        if (jar[k].slice(0, eq).trim() === name) return jar[k].slice(eq + 1).trim();
+      }
+      return "";
+    }
+
+    function writeCookie(name, value) {
+      try {
+        var exp = new Date(Date.now() + COOKIE_DAYS * 86400000).toUTCString();
+        document.cookie = name + "=" + value + "; expires=" + exp + "; path=/; SameSite=Lax";
+      } catch (e) { /* cookie bloqueado nunca impede o redirect */ }
+    }
+
+    // STICKY: cookie valido (aponta pra variante que ainda existe) manda. Nao re-sorteia.
+    var sticky = byId(readCookie(COOKIE));
+    if (sticky) { go(sticky.path); return; }
+
+    // SORTEIO PONDERADO pelo campo weight — nao assume pesos iguais.
+    var total = 0, weights = [];
+    for (var w = 0; w < variants.length; w++) {
+      var n = (typeof variants[w].weight === "number" && isFinite(variants[w].weight) && variants[w].weight > 0)
+        ? variants[w].weight : 0;
+      weights.push(n);
+      total += n;
+    }
+
+    var chosen = null;
+    if (total > 0) {
+      var r = Math.random() * total;
+      for (var c = 0; c < variants.length; c++) {
+        r -= weights[c];
+        if (r < 0) { chosen = variants[c]; break; }
+      }
+    }
+    if (!chosen) chosen = safe;
+
+    writeCookie(COOKIE, chosen.id);
+    go(chosen.path);
+  } catch (e) {
+    // Qualquer coisa que der errado: variante segura. Nunca tela branca.
+    go(FALLBACK_PATH);
+  }
+})();
+</script>
+</head>
+<body>
+<noscript><a href="/vsl-no-video/">Continue &rarr;</a></noscript>
+</body>
+</html>

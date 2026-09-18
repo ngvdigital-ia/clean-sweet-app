@@ -1,0 +1,8 @@
+{
+  "schema": "ngv-splitter.v1",
+  "offer": "clean-sweet-app",
+  "variants": [
+    { "id": "a", "path": "/vsl-no-video/", "weight": 1 }
+  ],
+  "updatedAt": "2026-09-18"
+}
